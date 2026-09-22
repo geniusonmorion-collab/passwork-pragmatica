@@ -1,0 +1,74 @@
+/* Attio's scroll scene, adapted to the Passwork layout and original palette. */
+.hero-copy-scroll { position: relative; z-index: 2; }
+.hero-window-shell { position: relative; margin-top: 28px; }
+.hero-window-scale { position: relative; z-index: 3; transform-origin: 50% 0; }
+.hero-window-scale > .product-window { margin-top: 0; }
+
+.site-header.is-scroll-header {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 85px;
+  padding-top: 12px;
+  border: 0;
+  isolation: isolate;
+  backdrop-filter: none;
+  transition: opacity 1s cubic-bezier(.42,0,.58,1), color .3s;
+}
+.site-header.is-scroll-header.is-header-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.site-header.is-scroll-header::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 -40px;
+  pointer-events: none;
+  background: linear-gradient(180deg, #222f64f5 0%, #222f64bf 55%, #222f6400 100%);
+  opacity: 0;
+  transition: opacity .3s;
+}
+.site-header.is-scrolled::before { opacity: 1; }
+.site-header.is-past-hero {
+  color: #6f7988;
+}
+.site-header.is-past-hero::before { background: linear-gradient(180deg, #fffffff5 0%, #ffffffdf 55%, #ffffff00 100%); }
+.site-header.is-past-hero :is(.brand img, .astra) { filter: brightness(.2); }
+.site-header.is-past-hero .header-inner nav :is(a,button):hover { color: #1c1d1f; }
+.site-header.is-past-hero .menu-toggle span { background: #1c1d1f; }
+
+@media (min-width: 1101px) and (prefers-reduced-motion: no-preference) {
+  .hero.has-scroll-motion {
+    overflow: clip;
+  }
+  .hero.has-scroll-motion::after {
+    /* Content space lets the sticky scene stay inside the hero's content box. */
+    content: '';
+    display: block;
+    height: max(0px, calc(100svh - var(--hero-window-height, 60svh) + 48px - 69 * var(--unit)));
+  }
+  .has-scroll-motion .hero-copy-scroll {
+    position: sticky;
+    top: calc(157 * var(--unit));
+    transition: opacity 1s cubic-bezier(.42,0,.58,1);
+  }
+  .has-scroll-motion.is-scrolled .hero-copy-scroll {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .has-scroll-motion .product-showcase {
+    position: sticky;
+    top: 104px;
+    padding-bottom: var(--hero-window-overflow, 0px);
+  }
+  .has-scroll-motion .hero-window-scale { transform: scale(var(--hero-window-scale, 1)); }
+
+}
+@media (max-width: 800px) {
+  .site-header.is-scroll-header { height: 73px; padding-top: 0; }
+  .hero-window-shell { margin-top: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header.is-scroll-header,
+  .site-header.is-scroll-header::before { transition: none; }
+}
