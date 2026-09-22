@@ -1,5 +1,12 @@
 # Пассворк — локальная адаптация клона Attio
 
+[Открыть сайт](https://geniusonmorion-collab.github.io/passwork-pragmatica/)
+
+GitHub Pages автоматически публикует текущую главную страницу после обновления `main`.
+`scripts/build-pages.py` собирает страницу и используемые ею ресурсы в `_site`,
+адаптируя пути для адреса репозитория. Локальная версия в `dist` остаётся доступной
+через `serve.py`.
+
 Главная страница на порту 8772 теперь соответствует макету [Passwork | Pragmatica, 2142:24179](https://www.figma.com/design/cJNZoxguk02Zbmg4X320R8/Passwork?node-id=2142-24179).
 
 - `dist/passwork.css` — адаптивная вёрстка, Museo Sans Cyrl и токены.
